@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Button,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
@@ -20,7 +21,15 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View>
-        
+         <Button
+                buttonStyle={{ marginTop: 20 }}
+                backgroundColor="#FFF"
+                title="SIGN IN"
+                onPress={() => {
+                  this.props.navigation.navigate('Appointment')
+                    
+                }}
+            />
 
       </View>
     );

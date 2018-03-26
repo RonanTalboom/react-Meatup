@@ -16,17 +16,14 @@ import {
     InputField,
 } from 'react-native';
 export default class LoginScreen extends Component {
-  static navigationOptions = {
-    title: 'Login',
-  };
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      Username: null,
-      password: null
+    static navigationOptions = {
+        title: 'Login',
     };
-  }
+    state = {
+        Username: null,
+        password: null
+    };
+
 
   
   render() {
@@ -44,15 +41,15 @@ export default class LoginScreen extends Component {
                 ref='password'
                 label='password'
                 placeholder='password'
+                style={styles.login}
                 onChangeText={(password) => this.setState({ password: password})}
                 />
 
 
 
             <Button
-                buttonStyle={{ marginTop: 20 }}
-                backgroundColor="#FFF"
                 title="SIGN IN"
+                buttonstyle={styles.login}
                 onPress={() => {
                     //change the user_KEY
                     let USER_KEY = this.state

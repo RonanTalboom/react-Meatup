@@ -23,10 +23,10 @@ const RootStack = StackNavigator(
     SignUp: {
       screen: SignUpScreen,
     },
-    AppointmentScreen: {
+    Appointment: {
       screen: AppointmentScreen,
     },
-    AddScreen: {
+    AddS: {
       screen: AddScreen,
     },
   },
@@ -39,7 +39,6 @@ const RootStack = StackNavigator(
 export default class App extends React.Component {
 
   state = {
-    isLoadingComplete: false,
     signedIn: false,
     checkedSignIn: false
   };

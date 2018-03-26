@@ -15,9 +15,9 @@ import {
     FormControl,
     InputField,
 } from 'react-native';
-export default class LoginScreen extends Component {
+export default class AddScreen extends Component {
   static navigationOptions = {
-    title: 'Login',
+    title: 'Add',
   };
   constructor(props) {
     super(props);
@@ -58,8 +58,7 @@ export default class LoginScreen extends Component {
                     let USER_KEY = this.state
                     onSignIn(USER_KEY).then (
                         this.props.navigation.navigate('Home')
-                    )
-                    
+                    )   
                 }}
             />
         </View>
