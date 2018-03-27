@@ -1,37 +1,89 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, TouchableOpacity, Text, Icon } from 'react-native';
 import { AppLoading, Asset, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import { isSignedIn } from "./components/auth";
 import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import AppointmentScreen from './screens/AppointmentScreen';
+import AuthLoadingScreen from './screens/AuthLoadingScreen';
 import AddScreen from './screens/AddScreen';
 import {
   StackNavigator,
+  DrawerNavigator,
+  SwitchNavigator,
 } from 'react-navigation';
 import HomeScreen from './screens/HomeScreen';
+// const DrawerIcon = () => {
+//   return(
+//   <View>
+//       <TouchableOpacity onPress={() => {this.props.navigation.navigate('DrawerToggle'); } }>
+//           <Icon name="bars" style={{padding: 10, marginLeft:10}} size={20} color="black" type={"font-awesome"}/>
+//       </TouchableOpacity>
+//   </View>
+//   );
+// };
 
-const RootStack = StackNavigator(
+
+const HomeScreenStack = StackNavigator(
+  {
+    HomeScreen: {
+      screen: HomeScreen,
+    }
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      initialRouteName: 'HomeScreen',
+      headerMode: 'screen',
+      headerTitle: 'Home',
+      drawerLabel: 'HomeScreen',
+      headerLeft: ( <TouchableOpacity onPress = {() => {navigation.navigate('DrawerToggle')} }>
+                      <Text>MENU</Text>
+                      {/* <Icon name="bars" style={{padding: 10, marginLeft:10}} size={20} color="black" type={"font-awesome"}/> */}
+                    </TouchableOpacity>
+               ),
+    }),
+  }
+);
+
+
+
+const AppStack = DrawerNavigator(
   {
     Home: {
-      screen: HomeScreen,
+      screen: HomeScreenStack,
     },
+    Appointment: {
+      screen: AppointmentScreen,
+    },
+    Add: {
+      screen: AddScreen,
+    },
+  },
+);
+const AuthStack = StackNavigator(
+  {
     Login: {
       screen: LoginScreen,
     },
     SignUp: {
       screen: SignUpScreen,
     },
-    Appointment: {
-      screen: AppointmentScreen,
-    },
-    AddS: {
-      screen: AddScreen,
-    },
   },
   {
-    initialRouteName: 'Login',
+  initialRouteName: 'Login',
+  }
+);
+
+
+const AuthCheck = SwitchNavigator(
+  {
+    AuthLoading: AuthLoadingScreen,
+    App: AppStack,
+    Auth: AuthStack,
+  },
+  {
+    initialRouteName: 'AuthLoading',
   }
 );
 
@@ -66,7 +118,8 @@ export default class App extends React.Component {
     //     />
     //   );
     // } else {
-        return <RootStack />;
+
+        return <AuthCheck />;
   }
 }
 

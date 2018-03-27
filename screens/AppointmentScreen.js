@@ -25,6 +25,7 @@ import {
 
 export default class AppointmentScreen extends Component {
     static navigationOptions = {
+        drawerLabel: 'Appointment',
         title: 'Appointment',
     };
     constructor() {
@@ -92,9 +93,6 @@ export default class AppointmentScreen extends Component {
         const newData = text ? data.filter(item => {
           return item.Activity.indexOf(text) > -1;
         }) : data;
-        // if (text === ""){
-        //     newData = data;
-        // }
         this.setState({
             filterdata: newData,
             text: text

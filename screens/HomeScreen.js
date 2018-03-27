@@ -8,29 +8,38 @@ import {
   TouchableOpacity,
   View,
   Button,
+  TouchableHighlight,
+  Icon,
 } from 'react-native';
+import {
+  DrawerNavigator,
+} from 'react-navigation';
 import { WebBrowser } from 'expo';
-
-import { MonoText } from '../components/StyledText';
-
+import AppointmentScreen from './AppointmentScreen';
+import {
+  NavigationAction,
+} from 'react-navigation';
 export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    header: null,
-  };
-
   render() {
     return (
       <View>
          <Button
                 buttonStyle={{ marginTop: 20 }}
                 backgroundColor="#FFF"
-                title="SIGN IN"
+                title="Appointment"
                 onPress={() => {
-                  this.props.navigation.navigate('Appointment')
+                  this.props.navigation.navigate('Appointment') 
+                }}
+            />
+             <Button
+                buttonStyle={{ marginTop: 20 }}
+                backgroundColor="#FFF"
+                title="menu"
+                onPress={() => {
+                  this.props.navigation.navigate('DrawerToggle');
                     
                 }}
             />
-
       </View>
     );
   }
