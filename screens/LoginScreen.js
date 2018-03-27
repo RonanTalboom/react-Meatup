@@ -47,8 +47,8 @@ export default class LoginScreen extends Component {
                     source={require('../assets/images/oldtimes_logo.png')}
                 />
             </View>
-            <Text style={styles.login_text}>MeatUP</Text>
                 <TextInput
+                    underlineColorAndroid='transparent'
                     ref='Username' 
                     label='Username' 
                     placeholder='Username'
@@ -57,6 +57,7 @@ export default class LoginScreen extends Component {
                     />
         
                 <TextInput
+                    underlineColorAndroid='transparent'
                     ref='password'
                     label='password'
                     placeholder='password'
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     login_text_register: {
+        marginTop: 20,
         color: 'white',
         fontSize: 10,
         textAlign: 'center',
@@ -125,7 +127,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         paddingLeft: 30,
         fontSize: 9,
-        marginBottom: 0, 
+        marginBottom: 10, 
         borderColor: '#ffffff',
         borderWidth: 1,
         borderBottomWidth: 0,
@@ -136,7 +138,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     login_view: {
-        backgroundColor: 'blue',
+        backgroundColor : "rgba(92, 99,216, 1)",
         alignContent: 'center',
         flex: 3,
         flexDirection: 'column',

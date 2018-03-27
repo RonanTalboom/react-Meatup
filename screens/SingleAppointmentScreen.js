@@ -107,32 +107,17 @@ export default class AppointmentScreen extends Component {
         onChangeText={(text => this.filterSearch(text)) }
         />;
     };
-    goToOtherScreen() {
-        this.props.navigation.navigate('SingleAppointmentScreen');
-    }
   
     render() {
         return (
             <View>
+                <Text style={styles.login_text} > Boodschappen </Text> 
                 <View style={styles.appointemnt_maps} >
-                </View>    
-                                <Button
-                    title="Add Apointment"
-                    plus
-                    titleStyle={{ fontWeight: "700" }}
-                    buttonStyle={{
-                        backgroundColor: "green",
-                        width: 300,
-                        height: 45,
-                        borderColor: "transparent",
-                        borderWidth: 0,
-                        borderRadius: 5
-                    }}
-                    containerStyle={{ marginTop: 20 }}
-                    onPress = {() =>{
-                        this.goToOtherScreen()
-                    }}
+                    <Image
+                        style={styles.appointment_image}
+                        source={require('../assets/images/mymaps-desktop-16x9.png')}
                     />
+                </View>    
                 <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
                     <FlatList
                         data={this.state.filterdata}
@@ -142,10 +127,6 @@ export default class AppointmentScreen extends Component {
                             title={item.Activity}
                             subtitle={item.Location}
                             containerStyle={{ borderBottomWidth: 0 }}
-                            onPress = {() => {
-                                console.log('click');
-                                this.goToOtherScreen(item)
-                            }}
                         />
                         )}
                         keyExtractor={item => item.ID}
@@ -163,6 +144,12 @@ export default class AppointmentScreen extends Component {
 
 
 const styles = StyleSheet.create({
+    login_text:{
+        textAlign: 'center',
+        color: 'black',
+        fontSize: 40,
+        fontWeight: '200',
+    },
     appointemnt_maps: {
         justifyContent: 'center',
         alignItems: 'center',

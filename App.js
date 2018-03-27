@@ -2,27 +2,36 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View, TouchableOpacity, Text, Icon } from 'react-native';
 import { AppLoading, Asset, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
-import { isSignedIn } from "./components/auth";
+import { isSignedIn, onSignOut } from "./components/auth";
 import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import AppointmentScreen from './screens/AppointmentScreen';
 import AuthLoadingScreen from './screens/AuthLoadingScreen';
 import AddScreen from './screens/AddScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import SingleAppointmentScreen from './screens/SingleAppointmentScreen';
 import {
   StackNavigator,
   DrawerNavigator,
   SwitchNavigator,
 } from 'react-navigation';
+import { Header } from "react-native-elements";
 import HomeScreen from './screens/HomeScreen';
-// const DrawerIcon = () => {
-//   return(
-//   <View>
-//       <TouchableOpacity onPress={() => {this.props.navigation.navigate('DrawerToggle'); } }>
-//           <Icon name="bars" style={{padding: 10, marginLeft:10}} size={20} color="black" type={"font-awesome"}/>
-//       </TouchableOpacity>
-//   </View>
-//   );
-// };
+const headerBar = (navigation) => {
+  return(
+    <View>
+      <Header
+      Style = {{
+        backgroundColor : "rgba(92, 99,216, 1)",
+      }}
+      leftComponent={
+        { icon: 'menu', color: '#fff', onPress: () => navigation.navigate('DrawerToggle')  }}
+      centerComponent={{ image: require('./assets/images/oldtimes_logo.png') }}
+      rightComponent={{ icon: 'settings', color: '#fff', onPress: () => onSignOut().then(navigation.navigate('Auth'))}}
+      />
+    </View>
+  );
+};
 
 
 const HomeScreenStack = StackNavigator(
@@ -35,13 +44,63 @@ const HomeScreenStack = StackNavigator(
     navigationOptions: ({ navigation }) => ({
       initialRouteName: 'HomeScreen',
       headerMode: 'screen',
-      headerTitle: 'Home',
       drawerLabel: 'HomeScreen',
-      headerLeft: ( <TouchableOpacity onPress = {() => {navigation.navigate('DrawerToggle')} }>
-                      <Text>MENU</Text>
-                      {/* <Icon name="bars" style={{padding: 10, marginLeft:10}} size={20} color="black" type={"font-awesome"}/> */}
-                    </TouchableOpacity>
-               ),
+      header: ( headerBar(navigation)),
+    }),
+  }
+);
+const AddScreenStack = StackNavigator(
+  {
+    AddScreen: {
+      screen: AddScreen,
+    }
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      
+      initialRouteName: 'AddScreen',
+      headerMode: 'screen',
+      drawerLabel: 'AddAppointment',
+      header: ( headerBar(navigation)),
+    }),
+  }
+);
+const SingleAppointmentScreenStack = StackNavigator(
+  {
+    SingleAppointmentScreen: {
+      screen: SingleAppointmentScreen,
+    }
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      
+      initialRouteName: 'SingleAppointmentScreen',
+      headerMode: 'screen',
+      drawerLabel: 'SingleAppointmentScreen',
+      header: ( headerBar(navigation)),
+    }),
+  }
+);
+const AppointmentscreenStack = StackNavigator(
+  {
+    AppointmentScreen: {
+      screen: AppointmentScreen,
+    },
+    AddScreen: {
+      screen: AddScreenStack,
+    },
+    SingleAppointmentScreen: {
+      screen: SingleAppointmentScreen,
+    }
+
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      
+      initialRouteName: 'AppointmentScreen',
+      headerMode: 'screen',
+      drawerLabel: 'AppointmentScreen',
+      header: ( headerBar(navigation, 'Appointments')),
     }),
   }
 );
@@ -54,10 +113,16 @@ const AppStack = DrawerNavigator(
       screen: HomeScreenStack,
     },
     Appointment: {
-      screen: AppointmentScreen,
+      screen: AppointmentscreenStack,
     },
     Add: {
-      screen: AddScreen,
+      screen: AddScreenStack,
+    },
+    single: {
+      screen: SingleAppointmentScreenStack,
+    },
+    Profile: {
+      screen: ProfileScreen,
     },
   },
 );
@@ -89,24 +154,10 @@ const AuthCheck = SwitchNavigator(
 
 
 export default class App extends React.Component {
-
-  state = {
-    signedIn: false,
-    checkedSignIn: false
-  };
-
-
-  componentWillMount() {
-    isSignedIn()
-      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
-      .catch(err => alert(err));
-  }
-
   render() {
-    const { checkedSignIn, signedIn } = this.state;
 
     // If we haven't checked AsyncStorage yet, don't render anything (better ways to do this)
-    console.log(checkedSignIn);    
+  
     
     // if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
 

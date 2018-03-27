@@ -19,11 +19,11 @@ import AppointmentScreen from './AppointmentScreen';
 import {
   NavigationAction,
 } from 'react-navigation';
-export default class HomeScreen extends React.Component {
+export default class ProfileScreen extends React.Component {
   render() {
     return (
       <View>
-         <AppointmentScreen/>
+         
       </View>
     );
   }

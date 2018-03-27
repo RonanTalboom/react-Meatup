@@ -14,7 +14,7 @@ let date = {
 export const getAppointment = () => {
     //make api calls
     let data = [];
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 3; i++) {
         let Appointment = {
             ID: '',
             Owner: '',
@@ -26,7 +26,15 @@ export const getAppointment = () => {
         Appointment.ID = i;
         Appointment.Owner = 'User ' + i;
         Appointment.Location = 'Leiden';
-        Appointment.Activity = 'Boodschappen' + (i * 5);
+        Appointment.Activity = 'Luc';
+        if (i === 1){
+            Appointment.Activity = 'Ronan';
+            Appointment.Location = 'Haarlem';
+        }
+        if (i === 2){
+            Appointment.Activity = 'Marnix';
+        }
+        
         // Appointment.StartTime =  this._getStartTime();
         // Appointment.EndTime = this._getEndTime();
         data.push(Appointment);
