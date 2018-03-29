@@ -16,7 +16,22 @@ import {
     MenuButton,
 } from 'react-native';
 import { Card, Button } from "react-native-elements";
+import DatePicker from 'react-native-datepicker'
+
+
 export default class AddScreen extends Component {
+
+    constructor(props){
+        super(props)
+        // const time = Date.parse(new Date());
+        this.state = {
+            datetime: '',
+            date:'',
+            Starttime: '',
+            EndTime: '',
+        }
+      }
+    
 
   
   render() {
@@ -38,13 +53,25 @@ export default class AddScreen extends Component {
                     style={styles.login_input}
                     onChangeText={(Username) => this.setState({ Username: Username})}
                     />
-            <TextInput
-                    underlineColorAndroid='transparent'
-                    ref='Username' 
-                    label='Username' 
-                    placeholder='startTime'
-                    style={styles.login_input}
-                    onChangeText={(Username) => this.setState({ Username: Username})}
+            <DatePicker
+                    style={{width: 200}}
+                    date={this.state.Starttime}
+                    mode="datetime"
+                    format="YYYY-MM-DD HH:mm"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    showIcon={false}
+                    onDateChange={(datetime) => {this.setState({Starttime: datetime});}}
+            />
+            <DatePicker
+                    style={{width: 200}}
+                    date={this.state.Endtime}
+                    mode="datetime"
+                    format="YYYY-MM-DD HH:mm"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    showIcon={false}
+                    onDateChange={(datetime) => {this.setState({EndTime: datetime});}}
             />
             <TextInput
                     underlineColorAndroid='transparent'
